@@ -4,16 +4,21 @@ import { ScrollView } from 'react-native'
 import { cats } from './breeds'
 import Item from './Item'
 import { SafeAreaView } from 'react-native'
+import { FlatList } from 'react-native'
+
+
 
 
 export default function App() {
   return (
     <SafeAreaView>
-      <ScrollView>
-        {cats.map((item, index) => {
+      <FlatList
+        data={cats}
+        renderItem={({ item, index }) => {
           return <Item title={`${index}. ${item.breed}`} />
-        })}
-      </ScrollView>
+        }}
+        keyExtractor={item => item.breed}
+      />
     </SafeAreaView >
   );
 }
