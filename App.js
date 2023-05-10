@@ -1,33 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { ScrollView } from 'react-native'
-import { cats } from './breeds'
-import Item from './Item'
-import { SafeAreaView } from 'react-native'
-import { FlatList } from 'react-native'
+import React from 'react';
+import { StyleSheet,View, Text } from 'react-native';
+
+import HomeScreen from './Homescreen'
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
-
+const Stack = createStackNavigator();
 
 export default function App() {
-  return (
-    <SafeAreaView>
-      <FlatList
-        data={cats}
-        renderItem={({ item, index }) => {
-          return <Item title={`${index}. ${item.breed}`} />
-        }}
-        keyExtractor={item => item.breed}
-      />
-    </SafeAreaView >
-  );
+ return (
+ <NavigationContainer>
+ <Stack.Navigator>
+ <Stack.Screen name="By-Breed" component={HomeScreen} />
+ </Stack.Navigator>
+ </NavigationContainer>
+ );
 }
 
+
 const styles = StyleSheet.create({
+  listContainer: {
+    width: '100%'
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
+    marginTop: 40 
   },
+  search: {
+    fontSize: 24,
+    textAlign: 'center',
+    padding: 10,
+    borderWidth: 1,
+    width: 200,
+    marginBottom: 5
+  }
 });
